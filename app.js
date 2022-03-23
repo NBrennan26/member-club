@@ -5,6 +5,11 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const createError = require("http-errors");
+const logger = require("morgan");
+const cookieParser = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
 
 const router = require("./routes/index");
 const User = require("./models/user");
@@ -71,7 +76,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(logger("dev"));
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(helmet());
+app.use(compression());
 
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
@@ -79,3 +89,21 @@ app.use(function (req, res, next) {
 });
 
 app.use("/", router);
+
+// Catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// Error Handler
+app.use(function (err, req, res, next) {
+  // Set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app("env") === "development" ? err : {};
+
+  // Render the error page
+  res.status(err.status || 500);
+  res.render("error");
+});
+
+app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
