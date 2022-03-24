@@ -48,27 +48,27 @@ router.get("/users", user_controller.user_list)
 ////////////////////
 
 // GET Create Message
-router.get("message/create", message_controller.message_create_get)
+router.get("/message/create", message_controller.message_create_get)
 
 // POST Create Message
-router.post("message/create", message_controller.message_create_post)
+router.post("/message/create", message_controller.message_create_post)
 
 // GET Message Details
-router.get("message/:id", message_controller.message_details)
+router.get("/message/:id", message_controller.message_details)
 
 // GET Update Message
-router.get("message/:id/update", message_controller.message_update_get)
+router.get("/message/:id/update", message_controller.message_update_get)
 
 // POST Update Message
-router.post("message/:id/update", message_controller.message_update_post)
+router.post("/message/:id/update", message_controller.message_update_post)
 
 // GET Delete Message
-router.get("message/:id/delete", message_controller.message_delete_get)
+router.get("/message/:id/delete", message_controller.message_delete_get)
 
 // POST Delete Message
-router.post("message/:id/delete", message_controller.message_delete_post)
+router.post("/message/:id/delete", message_controller.message_delete_post)
 
 // GET All Message List
-router.get("messages", message_controller.message_list)
+router.get("/messages", message_controller.message_list)
 
 module.exports = router;
