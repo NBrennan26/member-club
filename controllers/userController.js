@@ -43,7 +43,7 @@ exports.sign_up_post = [
     .escape(),
   body("member_status", "")
     .trim()
-    .isBoolean(),
+    .escape(),
 
   // Process Request after Validation & Sanitization
   (req, res, next) => {
@@ -74,7 +74,7 @@ exports.sign_up_post = [
           last_name: req.body.last_name,
           username: req.body.username,
           password: hashedPassword,
-          member_status: true,
+          member_status: req.body.member,
         });
         console.log("user create. now save")
         user.save(function (err) {

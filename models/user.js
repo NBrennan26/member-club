@@ -24,8 +24,8 @@ const UserSchema = new Schema({
     select: false, // This will not include password when pulling a users info. Manually pull it with ".select('+password')"
   },
   member_status: {
-    type: Boolean,
-    default: true,
+    type: String,
+    default: "member",
   },
 });
 
