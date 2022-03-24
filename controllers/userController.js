@@ -87,7 +87,13 @@ exports.sign_up_post = [
         });
         user.save(function (err) {
           if (err) {
-            return next(err);
+            res.render("index", {
+              title: "Members Only | Sign Up",
+              user: req.body,
+              errors: [{ msg:"Username is already taken" }],
+              view: "user_form",
+            });
+            return;
           }
           res.redirect(user.url);
         });
