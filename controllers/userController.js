@@ -2,7 +2,7 @@ const User = require("../models/user");
 const Message = require("../models/message");
 
 const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 // Display Home/Default Page
 exports.index = function (req, res) {
@@ -37,13 +37,23 @@ exports.sign_up_post = [
     .trim()
     .isLength({ min: 1, max: 30 })
     .escape(),
-  body("password", "Password is required and must be between 5 & 40 characters.")
+  body(
+    "password",
+    "Password is required and must be between 5 & 40 characters."
+  )
     .trim()
     .isLength({ min: 5, max: 40 })
     .escape(),
-  body("member_status", "")
+  body("confirm_password", "Passwords must Match")
     .trim()
-    .escape(),
+    .isLength({ min: 5, max: 40 })
+    .escape()
+    .custom((val, { req }) => {
+      if (val !== req.body.password) {
+        throw new Error("Passwords do not match")
+      } else { return true }
+    }),
+  body("member_status", "").trim().escape(),
 
   // Process Request after Validation & Sanitization
   (req, res, next) => {
@@ -52,23 +62,22 @@ exports.sign_up_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values/error messages
-      console.log(errors)
       res.render("index", {
         title: "Members Only | Sign Up",
         user: req.body,
         errors: errors.array(),
         view: "user_form",
       });
-      return
+      return;
     } else {
-      console.log("Got it. Time to hash and save")
-      // Data from form is valid
+      // Data from form is valid, check password match
+      
+
       // Hash password, then create User object with escaped and trimmed data
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) {
           return next(err);
         }
-        console.log("no errors. create user")
         let user = new User({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -76,17 +85,15 @@ exports.sign_up_post = [
           password: hashedPassword,
           member_status: req.body.member,
         });
-        console.log("user create. now save")
         user.save(function (err) {
           if (err) {
             return next(err);
           }
-          console.log("still no errors. redirect")
           res.redirect(user.url);
         });
       });
     }
-  }
+  },
 ];
 
 // Display User log-in page
