@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
 const logger = require("morgan");
-const cookieParser = require("morgan");
+const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const helmet = require("helmet");
 
@@ -83,6 +83,8 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(compression());
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
@@ -99,7 +101,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app("env") === "development" ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // Render the error page
   res.status(err.status || 500);
