@@ -53,7 +53,8 @@ exports.sign_up_post = [
         throw new Error("Passwords do not match")
       } else { return true }
     }),
-  body("member_status", "").trim().escape(),
+  body("member", "").isBoolean().trim().escape(),
+  body("admin", "").isBoolean().trim().escape(),
 
   // Process Request after Validation & Sanitization
   (req, res, next) => {
@@ -70,9 +71,7 @@ exports.sign_up_post = [
       });
       return;
     } else {
-      // Data from form is valid, check password match
-      
-
+      // Data from form is valid
       // Hash password, then create User object with escaped and trimmed data
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) {
@@ -83,10 +82,12 @@ exports.sign_up_post = [
           last_name: req.body.last_name,
           username: req.body.username,
           password: hashedPassword,
-          member_status: req.body.member,
+          member: req.body.member,
+          admin: req.body.admin,
         });
         user.save(function (err) {
-          if (err) {
+          if (err._message === "User validation failed") {
+            console.log(err._message)
             res.render("index", {
               title: "Members Only | Sign Up",
               user: req.body,
@@ -94,6 +95,9 @@ exports.sign_up_post = [
               view: "user_form",
             });
             return;
+          }
+          if (err && err._message !== "User validation failed") {
+            return next(err)
           }
           res.redirect(user.url);
         });

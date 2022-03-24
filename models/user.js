@@ -26,10 +26,12 @@ const UserSchema = new Schema({
     required: true,
     select: false, // This will not include password when pulling a users info. Manually pull it with ".select('+password')"
   },
-  member_status: {
-    type: String,
-    default: "member",
+  member: {
+    type: Boolean,
   },
+  admin: {
+    type: Boolean,
+  }
 });
 
 // Virtual for User's Full Name

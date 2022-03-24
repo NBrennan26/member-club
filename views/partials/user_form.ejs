@@ -57,9 +57,25 @@
   <div class="hidden-elem">
     <input 
       type="text"
-      name="member_status"
-      id="member_status"
-      value="member"
+      name="member"
+      id="member"
+      <% if (user.member !== true) { %>
+        value=false
+      <% } else { %>
+        value=true
+      <% } %>
+    />
+  </div>
+  <div class="hidden-elem">
+    <input 
+      type="text"
+      name="admin"
+      id="admin"
+      <% if (user.admin !== true) { %>
+        value=false
+      <% } else { %>
+        value=true
+      <% } %>   
     />
   </div>
   <button type="submit">Register</button>
