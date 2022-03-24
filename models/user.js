@@ -23,8 +23,9 @@ const UserSchema = new Schema({
     required: true,
     select: false, // This will not include password when pulling a users info. Manually pull it with ".select('+password')"
   },
-  member_statue: {
+  member_status: {
     type: Boolean,
+    default: true,
   },
 });
 

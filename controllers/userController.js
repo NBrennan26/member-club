@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 
+const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs")
+
 // Display Home/Default Page
 exports.index = function (req, res) {
   res.render("index", {
@@ -13,17 +16,78 @@ exports.index = function (req, res) {
 exports.sign_up_get = function (req, res) {
   res.render("index", {
     title: "Members Only | Sign Up",
+    user: "",
+    errors: "",
     view: "user_form",
   });
 };
 
 // Handle User sign-up on POST
-exports.sign_up_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Sign Up",
-    view: "user_form",
-  });
-};
+exports.sign_up_post = [
+  // Validate and Sanitize fields
+  body("first_name", "First Name is required and can be 30 characters max.")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .escape(),
+  body("last_name", "Last Name is required and can be 30 characters max.")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .escape(),
+  body("username", "Username is required and can be 30 characters max.")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .escape(),
+  body("password", "Password is required and must be between 5 & 40 characters.")
+    .trim()
+    .isLength({ min: 5, max: 40 })
+    .escape(),
+  body("member_status", "")
+    .trim()
+    .isBoolean(),
+
+  // Process Request after Validation & Sanitization
+  (req, res, next) => {
+    // Extract the validation errors from a request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages
+      console.log(errors)
+      res.render("index", {
+        title: "Members Only | Sign Up",
+        user: req.body,
+        errors: errors.array(),
+        view: "user_form",
+      });
+      return
+    } else {
+      console.log("Got it. Time to hash and save")
+      // Data from form is valid
+      // Hash password, then create User object with escaped and trimmed data
+      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+        if (err) {
+          return next(err);
+        }
+        console.log("no errors. create user")
+        let user = new User({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          username: req.body.username,
+          password: hashedPassword,
+          member_status: true,
+        });
+        console.log("user create. now save")
+        user.save(function (err) {
+          if (err) {
+            return next(err);
+          }
+          console.log("still no errors. redirect")
+          res.redirect(user.url);
+        });
+      });
+    }
+  }
+];
 
 // Display User log-in page
 exports.log_in_get = function (req, res) {
@@ -35,10 +99,19 @@ exports.log_in_get = function (req, res) {
 
 // Handle User log-in
 exports.log_in_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Log In",
-    view: "user_login",
-  });
+  // Validate and Sanitize fields
+  body("username", "Username is required.")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .escape(),
+    body("password", "Password is required.")
+      .trim()
+      .isLength({ min: 5, max: 40 })
+      .escape(),
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/",
+    });
 };
 
 // Handle User log-out
