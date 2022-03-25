@@ -13,6 +13,14 @@ exports.index = function (req, res) {
   });
 };
 
+// Display Contact Page
+exports.contact = function (req, res) {
+  res.render("index", {
+    title: "Members Only | Contact",
+    view: "contact",
+  });
+}
+
 // Display User sign-up form
 exports.sign_up_get = function (req, res) {
   res.render("index", {

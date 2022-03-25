@@ -87,6 +87,7 @@ app.use(helmet());
 app.use(compression());
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/images")));
 
 // Create currentUser variable (accessible in all views)
 app.use(function (req, res, next) {

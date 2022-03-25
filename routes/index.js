@@ -12,6 +12,9 @@ const message_controller = require("../controllers/messageController")
 // GET Home Page
 router.get("/", user_controller.index)
 
+// GET Contact Page
+router.get("/contact", user_controller.contact)
+
 /////////////////
 // USER ROUTES //
 /////////////////
