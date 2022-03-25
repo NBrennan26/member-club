@@ -221,14 +221,14 @@ exports.join_club_post = [
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values/error messages
       res.render("index", {
-        title: "Members Only | Sign Up",
+        title: "Members Only | Join Club",
         errors: errors.array(),
         view: "user_member",
       });
       return;
     } else {
       // Data from form is valid
-      console.log(req.user)
+      console.log(req.user);
       User.findByIdAndUpdate(req.user._id, { member: true }, (err, user) => {
         if (err) {
           return next(err);
@@ -250,10 +250,47 @@ exports.become_admin_get = function (req, res) {
 };
 
 // Handle User become admin on submit
-exports.become_admin_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Become Admin",
-    errors: "",
-    view: "user_admin",
-  });
-};
+exports.become_admin_post = [
+  // Validate and Sanitize fields
+  body("admin_code", "Invalid Admin Code")
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .escape()
+    .custom((val, { req }) => {
+      if (val !== process.env.ADMIN_CODE) {
+        throw new Error("Invalid Admin Code");
+      } else {
+        return true;
+      }
+    }),
+
+  // Process Request after Validation & Sanitization
+  (req, res, next) => {
+    // Extract the validation errors from a request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages
+      res.render("index", {
+        title: "Members Only | Join Admin",
+        errors: errors.array(),
+        view: "user_admin",
+      });
+      return;
+    } else {
+      // Data from form is valid
+      console.log(req.user);
+      User.findByIdAndUpdate(
+        req.user._id,
+        { member: true, admin: true },
+        (err, user) => {
+          if (err) {
+            return next(err);
+          } else {
+            res.redirect("/become-admin");
+          }
+        }
+      );
+    }
+  },
+];

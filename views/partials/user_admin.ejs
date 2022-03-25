@@ -1,18 +1,34 @@
 <h1>Become an Admin</h1>
 
-<form action="" method="POST">
-  <label for="admin_code">Admin Code</label>
-  <input
-    type="password"
-    name="admin_code"
-    id="admin_code"
-    placeholder="Admin Code"
-    minlength="1"
-    maxlength="30"
-    required
-  />
-  <button type="submit">Submit</button>
-</form>
+<!-- Check if Logged In-->
+<% if (currentUser) { %> 
+  <!-- Check if already an admin-->
+  <% if (currentUser.admin) { %>
+    <h2>You are already an admin</h2>
+    <h3>Visit the <a href="/messages">Message Board</a></h3>
+  <!-- If not an admin, prompt to fill form-->
+  <% } else { %>
+    <h2>Please enter the secret code to become an Admin</h2>
+    <form action="" method="POST">
+      <label for="admin_code">Admin Code</label>
+      <input
+        type="password"
+        name="admin_code"
+        id="admin_code"
+        placeholder="Admin Code"
+        minlength="1"
+        maxlength="100"
+        required
+      />
+      <button type="submit">Become Admin</button>
+    </form>
+  <% } %>
+<!-- If not Logged In, prompt to sign-up/log-in-->
+<% } else { %>  
+  <h2>Please Sign Up and Log In in order to become an Admin</h2>
+  <a href="log-in">Log In</a>
+  <a href="sign-up">Sign Up</a>
+<% } %>
 
 <% if (errors) { %>
   <ul>
