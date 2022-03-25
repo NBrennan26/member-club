@@ -199,13 +199,46 @@ exports.join_club_get = function (req, res) {
 };
 
 // Handle User join club on submit
-exports.join_club_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Join Club",
-    errors: "",
-    view: "user_member",
-  });
-};
+exports.join_club_post = [
+  // Validate and Sanitize fields
+  body("member_code", "Invalid Member Code")
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .escape()
+    .custom((val, { req }) => {
+      if (val !== process.env.MEMBER_CODE) {
+        throw new Error("Invalid Member Code");
+      } else {
+        return true;
+      }
+    }),
+
+  // Process Request after Validation & Sanitization
+  (req, res, next) => {
+    // Extract the validation errors from a request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages
+      res.render("index", {
+        title: "Members Only | Sign Up",
+        errors: errors.array(),
+        view: "user_member",
+      });
+      return;
+    } else {
+      // Data from form is valid
+      console.log(req.user)
+      User.findByIdAndUpdate(req.user._id, { member: true }, (err, user) => {
+        if (err) {
+          return next(err);
+        } else {
+          res.redirect("/join-club");
+        }
+      });
+    }
+  },
+];
 
 // Display form to become admin
 exports.become_admin_get = function (req, res) {

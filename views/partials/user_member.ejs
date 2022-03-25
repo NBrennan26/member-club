@@ -1,18 +1,34 @@
 <h1>Join the Club</h1>
 
-<form action="" method="POST">
-  <label for="member_code">Membership Code</label>
-  <input
-    type="password"
-    name="member_code"
-    id="member_code"
-    placeholder="Membership Code"
-    minlength="1"
-    maxlength="30"
-    required
-  />
-  <button type="submit">Join!</button>
-</form>
+<!-- Check if Logged In-->
+<% if (currentUser) { %> 
+  <!-- Check if already a member-->
+  <% if (currentUser.member) { %>
+    <h2>You are already a member</h2>
+    <h3>Visit the <a href="/messages">Message Board</a></h3>
+  <!-- If not a member, prompt to fill form-->
+  <% } else { %>
+    <h2>Please enter the secret code to join the Club</h2>
+    <form action="" method="POST">
+      <label for="member_code">Membership Code</label>
+      <input
+        type="password"
+        name="member_code"
+        id="member_code"
+        placeholder="Membership Code"
+        minlength="1"
+        maxlength="30"
+        required
+      />
+      <button type="submit">Join!</button>
+    </form>
+  <% } %>
+<!-- If not Logged In, prompt to sign-up/log-in-->
+<% } else { %>  
+  <h2>Please Sign Up and Log In to join the Club</h2>
+  <a href="log-in">Log In</a>
+  <a href="sign-up">Sign Up</a>
+<% } %>
 
 <% if (errors) { %>
   <ul>
