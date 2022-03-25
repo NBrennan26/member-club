@@ -37,7 +37,7 @@ app.set("view engine", "ejs");
 // Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
+    User.findOne({ username: {"$regex": username, $options: "i" }}, (err, user) => {
       if (err) {
         return done(err);
       }
