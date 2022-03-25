@@ -3,6 +3,7 @@ const Message = require("../models/message");
 
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 // Display Home/Default Page
 exports.index = function (req, res) {
@@ -88,18 +89,20 @@ exports.sign_up_post = [
           admin: req.body.admin,
         });
         user.save(function (err) {
-          if (err._message === "User validation failed") {
-            console.log(err._message);
-            res.render("index", {
-              title: "Members Only | Sign Up",
-              user: req.body,
-              errors: [{ msg: "Username is already taken" }],
-              view: "user_form",
-            });
-            return;
-          }
-          if (err && err._message !== "User validation failed") {
-            return next(err);
+          if (err) {
+            if (err._message === "User validation failed") {
+              console.log(err._message);
+              res.render("index", {
+                title: "Members Only | Sign Up",
+                user: req.body,
+                errors: [{ msg: "Username is already taken" }],
+                view: "user_form",
+              });
+              return;
+            }
+            if (err && err._message !== "User validation failed") {
+              return next(err);
+            }
           }
           res.redirect(user.url);
         });
@@ -112,26 +115,41 @@ exports.sign_up_post = [
 exports.log_in_get = function (req, res) {
   res.render("index", {
     title: "Members Only | Log In",
+    user: "",
+    errors: "",
     view: "user_login",
   });
 };
 
 // Handle User log-in
-exports.log_in_post = function (req, res) {
+exports.log_in_post = [
   // Validate and Sanitize fields
   body("username", "Username is required.")
     .trim()
     .isLength({ min: 1, max: 30 })
     .escape(),
-    body("password", "Password is required.")
-      .trim()
-      .isLength({ min: 5, max: 40 })
-      .escape(),
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/",
-    });
-};
+  body("password", "Password is required.")
+    .trim()
+    .isLength({ min: 5, max: 40 })
+    .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render("/index", {
+        title: "Members Only | Log In",
+        user: req.body,
+        errors: errors.array(),
+        view: "user_login",
+      });
+    }
+    next();
+  },
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/log-in",
+  }),
+];
 
 // Handle User log-out
 exports.log_out = function (req, res) {

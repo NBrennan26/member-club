@@ -35,25 +35,27 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Passport
-new LocalStrategy((username, password, done) => {
-  User.findOne({ username: username }, (err, user) => {
-    if (err) {
-      return done(err);
-    }
-    if (!user) {
-      return done(null, false, { message: "Incorrect Username" });
-    }
-    bcrypt.compare(password, user.password, (err, res) => {
-      if (res) {
-        // Passwords Match - Log User in
-        return done(null, user);
-      } else {
-        // No Password Match
-        return done(null, false, { message: "Incorrect Password" });
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) {
+        return done(err);
       }
+      if (!user) {
+        return done(null, false, { message: "Incorrect Username" });
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // Passwords Match - Log User in
+          return done(null, user);
+        } else {
+          // No Password Match
+          return done(null, false, { message: "Incorrect Password" });
+        }
+      });
     });
-  });
-});
+  })
+);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
@@ -85,6 +87,7 @@ app.use(compression());
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// Create currentUser variable (accessible in all views)
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
