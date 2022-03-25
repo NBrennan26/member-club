@@ -1,0 +1,23 @@
+<h1>Become an Admin</h1>
+
+<form action="" method="POST">
+  <label for="admin_code">Admin Code</label>
+  <input
+    type="password"
+    name="admin_code"
+    id="admin_code"
+    placeholder="Admin Code"
+    minlength="1"
+    maxlength="30"
+    required
+  />
+  <button type="submit">Submit</button>
+</form>
+
+<% if (errors) { %>
+  <ul>
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

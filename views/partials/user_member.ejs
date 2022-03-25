@@ -1,0 +1,23 @@
+<h1>Join the Club</h1>
+
+<form action="" method="POST">
+  <label for="member_code">Membership Code</label>
+  <input
+    type="password"
+    name="member_code"
+    id="member_code"
+    placeholder="Membership Code"
+    minlength="1"
+    maxlength="30"
+    required
+  />
+  <button type="submit">Join!</button>
+</form>
+
+<% if (errors) { %>
+  <ul>
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

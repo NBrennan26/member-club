@@ -50,8 +50,10 @@ exports.sign_up_post = [
     .escape()
     .custom((val, { req }) => {
       if (val !== req.body.password) {
-        throw new Error("Passwords do not match")
-      } else { return true }
+        throw new Error("Passwords do not match");
+      } else {
+        return true;
+      }
     }),
   body("member", "").isBoolean().trim().escape(),
   body("admin", "").isBoolean().trim().escape(),
@@ -87,17 +89,17 @@ exports.sign_up_post = [
         });
         user.save(function (err) {
           if (err._message === "User validation failed") {
-            console.log(err._message)
+            console.log(err._message);
             res.render("index", {
               title: "Members Only | Sign Up",
               user: req.body,
-              errors: [{ msg:"Username is already taken" }],
+              errors: [{ msg: "Username is already taken" }],
               view: "user_form",
             });
             return;
           }
           if (err && err._message !== "User validation failed") {
-            return next(err)
+            return next(err);
           }
           res.redirect(user.url);
         });
@@ -166,5 +168,41 @@ exports.user_list = function (req, res) {
   res.render("index", {
     title: "Members Only | All Users",
     view: "user_list",
+  });
+};
+
+// Display form to become member
+exports.join_club_get = function (req, res) {
+  res.render("index", {
+    title: "Members Only | Join Club",
+    errors: "",
+    view: "user_member",
+  });
+};
+
+// Handle User join club on submit
+exports.join_club_post = function (req, res) {
+  res.render("index", {
+    title: "Members Only | Join Club",
+    errors: "",
+    view: "user_member",
+  });
+};
+
+// Display form to become admin
+exports.become_admin_get = function (req, res) {
+  res.render("index", {
+    title: "Members Only | Become Admin",
+    errors: "",
+    view: "user_admin",
+  });
+};
+
+// Handle User become admin on submit
+exports.become_admin_post = function (req, res) {
+  res.render("index", {
+    title: "Members Only | Become Admin",
+    errors: "",
+    view: "user_admin",
   });
 };

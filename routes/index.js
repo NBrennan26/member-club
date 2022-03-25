@@ -43,6 +43,18 @@ router.post("/user/:id/update", user_controller.user_update_post)
 // GET All User List
 router.get("/users", user_controller.user_list)
 
+// GET User become member
+router.get("/join-club", user_controller.join_club_get)
+
+// POST User become member
+router.post("/join-club", user_controller.join_club_post)
+
+// GET User become admin
+router.get("/become-admin", user_controller.become_admin_get)
+
+// POST User become admin
+router.post("/become-admin", user_controller.become_admin_post)
+
 ////////////////////
 // MESSAGE ROUTES //
 ////////////////////
