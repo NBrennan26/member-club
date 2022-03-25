@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator")
+const uniqueValidator = require("mongoose-unique-validator");
 
 const Schema = mongoose.Schema;
 
@@ -24,14 +24,14 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-    select: false, // This will not include password when pulling a users info. Manually pull it with ".select('+password')"
+    // select: false, // This will not include password when pulling a users info. Manually pull it with ".select('+password')"
   },
   member: {
     type: Boolean,
   },
   admin: {
     type: Boolean,
-  }
+  },
 });
 
 // Virtual for User's Full Name
@@ -46,7 +46,7 @@ UserSchema.virtual("url").get(function () {
 });
 
 // Apply uniqueValidator plugin to UserSchema
-UserSchema.plugin(uniqueValidator, { message: "Username is already taken" })
+UserSchema.plugin(uniqueValidator, { message: "Username is already taken" });
 
 // Export Model
 module.exports = mongoose.model("User", UserSchema);

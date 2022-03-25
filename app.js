@@ -44,6 +44,7 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect Username" });
       }
+
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           // Passwords Match - Log User in
