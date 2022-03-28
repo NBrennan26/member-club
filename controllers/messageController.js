@@ -5,6 +5,9 @@ const Message = require("../models/message");
 exports.message_create_get = function(req, res) {
   res.render("index", {
     title: "Members Only | New Message",
+    message: "",
+    user: "",
+    errors: "",
     view: "message_form"
   })
 }

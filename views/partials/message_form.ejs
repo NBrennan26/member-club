@@ -1,1 +1,44 @@
 <h1>New/Update Message Form</h1>
+
+<div>
+  <form action="" method="POST">
+    <label for="title">Message Title</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      value="<%= message.title %>"
+      placeholder="Title"
+      minlength="1"
+      maxlength="140"
+      required
+    />
+    <label for="text">Content</label>
+    <input
+      type="text"
+      name="text"
+      id="text"
+      value="<%= message.text %>"
+      placeholder="Your Content Here"
+      minlength="1"
+      maxlength="280"
+      required
+    />
+    <div class="hidden-elem">
+      <input 
+        type="date"
+        name="time"
+        id="time"
+        value="<%= message.date_ISO %>"
+      />
+    </div>
+    <div class="hidden-elem">
+      <input 
+        type="text"
+        name="user"
+        id="user"
+        value="<%= currentUser %>"
+      />
+    </div>
+  </form>
+</div>

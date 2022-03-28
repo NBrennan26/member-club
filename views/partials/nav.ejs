@@ -9,5 +9,7 @@
   <a href="/join-club">Join Club</a>
   <a href="/become-admin">Become Admin</a>
   <a href="/contact">Contact</a>
-  <a href="/message/create">Create Message</a>
+  <% if (currentUser) { %>
+    <a href="/message/create">Add Message</a>
+  <% } %>
 </div>
