@@ -30,7 +30,7 @@ const MessageSchema = new Schema({
 MessageSchema.virtual("date_ISO").get(function() {
   return DateTime.fromJSDate(this.timestamp)
     .setZone("UTC")
-    .toLocaleString(DateTime.DATETIME_MED)
+    .toLocaleString(DateTime.DATETIME_SHORT)
 })
 
 // Virtual for Message's URL

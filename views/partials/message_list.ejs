@@ -1,1 +1,43 @@
 <h1>All Messages</h1>
+
+<ul>
+  <% if (message_list.length > 0) { %>
+    <% message_list.forEach(message => { %>
+      <% if (currentUser) { %>
+        <% if (currentUser.member) { %>
+          <li>
+            <span><%= message.title %></span>
+            <span><%= message.content %></span>
+            <span><%= message.date_ISO %></span>
+            <span><%= message.user.username%></span>
+            <% if (currentUser.admin) {  %>
+              <form method="POST" action="/message/<%= message._id %>/delete" >
+                <input 
+                  id=""
+                  type="hidden"
+                  value="<%= message._id %>"
+                  required="true"
+                >
+                <button>Delete</button>
+              </form>
+            <% } %>
+          </li>
+        <% } %>
+      <% } else { %>
+        <li>
+          <span><%= message.title %></span>
+          <span><%= message.content %></span>
+        </li>
+      <% } %>
+      <li>
+        <% if (currentUser) { %>
+          <% if (currentUser.member) { %>
+            <span><%= message.user.username %></span>
+          <% } %>
+        <% } %>
+      </li>
+    <% }) %>
+  <% } else { %>
+    <span>There are none</span>
+  <% } %>
+</ul>

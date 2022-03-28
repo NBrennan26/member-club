@@ -97,16 +97,29 @@ exports.message_delete_get = function (req, res) {
 
 // Handle delete Message on POST
 exports.message_delete_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Delete Message",
-    view: "message_delete",
-  });
+  Message.findByIdAndRemove(req.params.id, function deleteMessage(err) {
+    if (err) {
+      return next(err)
+    }
+    // Success - Redirect back to message list
+    res.redirect("/messages")
+  })
 };
 
 // Display list of all Messages
 exports.message_list = function (req, res) {
-  res.render("index", {
-    title: "Members Only | All Messages",
-    view: "message_list",
-  });
+  Message.find()
+    .sort([["timestamp", "descending"]])
+    .populate("user")
+    .exec(function(err, list_messages) {
+      if (err) {
+        return next(err)
+      }
+      // Successful, so render
+      res.render("index", {
+        title: "",
+        message_list: list_messages,
+        view: "message_list",
+      })
+    })
 };
