@@ -57,7 +57,7 @@ exports.message_create_post = [
         if (err) {
           return next(err);
         }
-        res.redirect(message.url);
+        res.redirect("/messages");
       });
     }
   },
