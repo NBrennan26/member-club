@@ -9,36 +9,32 @@
       id="title"
       value="<%= message.title %>"
       placeholder="Title"
-      minlength="1"
-      maxlength="140"
       required
     />
-    <label for="text">Content</label>
+    <label for="content">Content</label>
     <input
       type="text"
-      name="text"
-      id="text"
-      value="<%= message.text %>"
+      name="content"
+      id="content"
+      value="<%= message.content %>"
       placeholder="Your Content Here"
-      minlength="1"
-      maxlength="280"
       required
     />
-    <div class="hidden-elem">
-      <input 
-        type="date"
-        name="time"
-        id="time"
-        value="<%= message.date_ISO %>"
-      />
-    </div>
     <div class="hidden-elem">
       <input 
         type="text"
         name="user"
         id="user"
-        value="<%= currentUser %>"
+        value="<%= user._id %>"
       />
     </div>
+    <button type="submit">Submit</button>
   </form>
 </div>
+<% if (errors) { %>
+  <ul>
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

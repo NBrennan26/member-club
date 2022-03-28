@@ -6,18 +6,18 @@ const Schema = mongoose.Schema;
 const MessageSchema = new Schema({
   title: {
     type: String,
-    required: true,
     maxlength: 140,
+    required: true,
   },
-  time: {
+  content: {
+    type: String,
+    maxlength: 280,
+    required: true,
+  },
+  timestamp: {
     type: Date,
     default: Date.now,
     required: true,
-  },
-  text: {
-    type: String,
-    required: true,
-    maxlength: 280,
   },
   user: {
     type: Schema.Types.ObjectId,
@@ -28,7 +28,7 @@ const MessageSchema = new Schema({
 
 // Virtual for Message's formatted date
 MessageSchema.virtual("date_ISO").get(function() {
-  return DateTime.fromJSDate(this.date)
+  return DateTime.fromJSDate(this.timestamp)
     .setZone("UTC")
     .toLocaleString(DateTime.DATETIME_MED)
 })

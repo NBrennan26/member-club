@@ -1,69 +1,112 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 
+const { body, validationResult } = require("express-validator");
+
 // Display create Message form
-exports.message_create_get = function(req, res) {
+exports.message_create_get = function (req, res) {
   res.render("index", {
     title: "Members Only | New Message",
+    user: req.user,
     message: "",
-    user: "",
     errors: "",
-    view: "message_form"
-  })
-}
+    view: "message_form",
+  });
+};
 
 // Handle create new Message on POST
-exports.message_create_post = function(req, res) {
-  res.render("index", {
-    title: "Members Only | New Message",
-    view: "message_form"
-  })
-}
+exports.message_create_post = [
+  // Validate and Sanitize Fields
+  body("title")
+    .trim()
+    .isLength({ max: 140 })
+    .escape()
+    .withMessage("Title is required and must be less than 140 characters"),
+  body("content")
+    .trim()
+    .isLength({ max: 280 })
+    .escape()
+    .withMessage("Content is required and must be less than 280 characters"),
+  body("user").trim().escape(),
+
+  // Process request after Validation and Sanitization
+  (req, res, next) => {
+    // Extract Validation Errors from the Request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are Errors. Render Again
+      res.render("index", {
+        title: "Members Only | New Message",
+        user: req.user,
+        message: req.body,
+        errors: errors.array(),
+        view: "message_form",
+      });
+      return;
+    } else {
+      // Data is Valid, no Errors
+      // Create new Message object
+      let message = new Message({
+        title: req.body.title,
+        content: req.body.content,
+        timestamp: Date.now(),
+        user: req.body.user,
+      });
+      message.save(function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect(message.url);
+      });
+    }
+  },
+];
 
 // Display details of a specific Message
-exports.message_details = function(req, res) {
+exports.message_details = function (req, res) {
   res.render("index", {
     title: "Members Only | Message Details",
-    view: "message_detail"
-  })
-}
+    view: "message_detail",
+  });
+};
 
 // Display form to update a specific Message
-exports.message_update_get = function(req, res) {
+exports.message_update_get = function (req, res) {
   res.render("index", {
     title: "Members Only | Update Message",
-    view: "message_form"
-  })
-}
+    view: "message_form",
+  });
+};
 
 // Handle update Message on POST
-exports.message_update_post = function(req, res) {
+exports.message_update_post = function (req, res) {
   res.render("index", {
     title: "Members Only | Update Message",
-    view: "message_form"
-  })
-}
+    view: "message_form",
+  });
+};
 
 // Display form to delete a specific Message
-exports.message_delete_get = function(req, res) {
+exports.message_delete_get = function (req, res) {
   res.render("index", {
     title: "Members Only | Delete Message",
-    view: "message_delete"
-  })
-}
+    view: "message_delete",
+  });
+};
 
 // Handle delete Message on POST
-exports.message_delete_post = function(req, res) {
+exports.message_delete_post = function (req, res) {
   res.render("index", {
     title: "Members Only | Delete Message",
-    view: "message_delete"
-  })
-}
+    view: "message_delete",
+  });
+};
 
 // Display list of all Messages
-exports.message_list = function(req, res) {
+exports.message_list = function (req, res) {
   res.render("index", {
     title: "Members Only | All Messages",
-    view: "message_list"
-  })
-}
+    view: "message_list",
+  });
+};
