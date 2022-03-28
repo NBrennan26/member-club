@@ -7,10 +7,7 @@ const passport = require("passport");
 
 // Display Home/Default Page
 exports.index = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Home",
-    view: "home",
-  });
+  res.redirect("/messages")
 };
 
 // Display Contact Page

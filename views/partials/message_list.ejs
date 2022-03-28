@@ -22,6 +22,11 @@
               </form>
             <% } %>
           </li>
+        <% } else { %>
+          <li>
+            <span><%= message.title %></span>
+            <span><%= message.content %></span>
+          </li>
         <% } %>
       <% } else { %>
         <li>
