@@ -29,13 +29,6 @@
           <span><%= message.content %></span>
         </li>
       <% } %>
-      <li>
-        <% if (currentUser) { %>
-          <% if (currentUser.member) { %>
-            <span><%= message.user.username %></span>
-          <% } %>
-        <% } %>
-      </li>
     <% }) %>
   <% } else { %>
     <span>There are none</span>

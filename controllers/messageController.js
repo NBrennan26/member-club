@@ -99,11 +99,11 @@ exports.message_delete_get = function (req, res) {
 exports.message_delete_post = function (req, res) {
   Message.findByIdAndRemove(req.params.id, function deleteMessage(err) {
     if (err) {
-      return next(err)
+      return next(err);
     }
     // Success - Redirect back to message list
-    res.redirect("/messages")
-  })
+    res.redirect("/messages");
+  });
 };
 
 // Display list of all Messages
@@ -111,15 +111,15 @@ exports.message_list = function (req, res) {
   Message.find()
     .sort([["timestamp", "descending"]])
     .populate("user")
-    .exec(function(err, list_messages) {
+    .exec(function (err, list_messages) {
       if (err) {
-        return next(err)
+        return next(err);
       }
       // Successful, so render
       res.render("index", {
-        title: "",
+        title: "Members Only | All Messages",
         message_list: list_messages,
         view: "message_list",
-      })
-    })
+      });
+    });
 };
