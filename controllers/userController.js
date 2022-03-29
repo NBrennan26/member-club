@@ -61,6 +61,7 @@ exports.sign_up_post = [
         return true;
       }
     }),
+  body("icon", "").escape(),
   body("member", "").isBoolean().trim().escape(),
   body("admin", "").isBoolean().trim().escape(),
 
@@ -90,6 +91,7 @@ exports.sign_up_post = [
           last_name: req.body.last_name,
           username: req.body.username,
           password: hashedPassword,
+          icon: req.body.icon,
           member: req.body.member,
           admin: req.body.admin,
         });

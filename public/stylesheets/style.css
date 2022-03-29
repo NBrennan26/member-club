@@ -34,6 +34,20 @@ footer a {
   margin: 0 1em;
   text-decoration: none;
 }
+.icon-radio-cont {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.icon-radio-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+.icon-radio-img {
+  height: 150px;
+}
 #github-icon {
   height: 3vh;
   width: 3vh;
