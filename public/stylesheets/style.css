@@ -8,7 +8,7 @@ body {
 footer {
   height: 4vh;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
@@ -19,6 +19,11 @@ footer {
 footer a {
   text-decoration: none;
   color: black;
+}
+#github-icon {
+  height: 3vh;
+  width: 3vh;
+  vertical-align: middle;
 }
 .hidden-elem {
   display: none;
@@ -48,11 +53,60 @@ footer a {
 .icon-radio-img {
   height: 150px;
 }
-#github-icon {
-  height: 3vh;
-  width: 3vh;
-  vertical-align: middle;
+
+/* Message List */
+.message-board-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.message-card {
+  width: 70%;
+  max-width: 900px;
+  min-height: 200px;
+  max-height: 400px;
+  margin: .5em 0;
+  border: 2px solid black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.message-head {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.message-delete-btn {
+  display: none;
+}
+.message-main {
+  width: 90%;
+  min-height: 150px;
+  display: flex;
+}
+.message-user {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .message-user-icon {
   height: 100px;
+  margin-right: .5em;
+  margin-bottom: .7em;
+}
+.message-text {
+
+}
+.message-date {
+  position: absolute;
+  bottom: .5em;
+  right: .5em;
+}
+.message-card:hover .message-head .message-delete-form .message-delete-btn {
+  display: block;
 }

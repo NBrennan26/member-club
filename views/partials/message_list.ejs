@@ -1,5 +1,3 @@
-<h1>All Messages</h1>
-
 <ul class="message-board-cont">
   <% if (message_list.length > 0) { %>
     <% message_list.forEach(message => { %>
@@ -7,11 +5,12 @@
       <% if (currentUser) { %>
         <!-- Check if User is Member -->
         <% if (currentUser.member) { %>
+          <!-- Create Message card / li (for each message) -->
           <li class="message-card">
             <div class="message-head">
               <!-- If User is Admin, enable delete button -->
               <% if (currentUser.admin) {  %>
-                <form method="POST" action="/message/<%= message._id %>/delete" >
+                <form method="POST" action="/message/<%= message._id %>/delete" class="message-delete-form">
                   <input 
                     id=""
                     type="hidden"
@@ -29,8 +28,8 @@
                 <span><%= message.user.username%></span>
               </div>
               <div class="message-text">
-                <span><%= message.title %></span>
-                <span><%= message.content %></span>
+                <p><%= message.title %></p>
+                <p><%= message.content %></p>
               </div>
             </div>
             <div class="message-date">
@@ -56,3 +55,6 @@
     <span>There are none</span>
   <% } %>
 </ul>
+<br>
+<br>
+<br>
