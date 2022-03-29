@@ -109,7 +109,7 @@ exports.sign_up_post = [
               return next(err);
             }
           }
-          res.redirect(user.url);
+          res.redirect("/log-in");
         });
       });
     }
