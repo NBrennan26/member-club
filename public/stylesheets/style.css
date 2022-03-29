@@ -76,11 +76,17 @@ footer a {
 }
 .message-head {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: .2em;
+  right: .2em;
 }
 .message-delete-btn {
   display: none;
+  justify-content: center;
+  align-items: center;
+  background: red;
+  border: none;
+  width: 20px;
+  height: 20px;
 }
 .message-main {
   width: 90%;
@@ -108,5 +114,6 @@ footer a {
   right: .5em;
 }
 .message-card:hover .message-head .message-delete-form .message-delete-btn {
-  display: block;
+  display: flex;
+  cursor: pointer;
 }
