@@ -111,8 +111,6 @@ footer a {
   flex-direction: column;
   align-items: center;
 }
-
-
 /****************/
 /* Message List */
 /****************/
@@ -187,4 +185,19 @@ footer a {
 .message-card:hover .message-head .message-delete-form .message-delete-btn {
   display: flex;
   cursor: pointer;
+}
+/****************/
+/* Contact Info */
+/****************/
+.contact-info-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact-link {
+  text-decoration: none;
+}
+#github-contact, #linkedin-contact, #email-contact {
+  height: 80px;
+  margin-bottom: .5em;
 }

@@ -15,6 +15,7 @@ exports.contact = function (req, res) {
   res.render("index", {
     title: "Members Only | Contact",
     view: "contact",
+    email: process.env.CONTACT_EMAIL,
   });
 }
 
