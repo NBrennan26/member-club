@@ -2,52 +2,42 @@
   <% if (message_list.length > 0) { %>
     <% message_list.forEach(message => { %>
       <!-- Check if User is logged in -->
-      <% if (currentUser) { %>
-        <!-- Check if User is Member -->
-        <% if (currentUser.member) { %>
-          <!-- Create Message card / li (for each message) -->
-          <li class="message-card">
-            <div class="message-head">
-              <!-- If User is Admin, enable delete button -->
-              <% if (currentUser.admin) {  %>
-                <form method="POST" action="/message/<%= message._id %>/delete" class="message-delete-form">
-                  <input 
-                    id=""
-                    type="hidden"
-                    value="<%= message._id %>"
-                    required="true"
-                  >
-                  <button class="message-delete-btn">X</button>
-                </form>
-              <% } %>
-            </div>
-            <!-- Main Card Content // User and Content // -->
-            <div class="message-main">
-              <div class="message-user">
-                <img src="/<%= message.user.icon %>" alt="User Icon" class="message-user-icon">
-                <span><%= message.user.username%></span>
-              </div>
-              <div class="message-text">
-                <p><%= message.title %></p>
-                <p><%= message.content %></p>
-              </div>
-            </div>
-            <div class="message-date">
-              <span><%= message.date_ISO %></span>
-            </div>
-          </li>
-        <!-- User is not a Member - Limited Message View -->
-        <% } else { %>
-          <li class="message-card-limited">
-            <span><%= message.title %></span>
-            <span><%= message.content %></span>
-          </li>
-        <% } %>
-      <!-- User is not logged in - Limited Message View -->
-      <% } else { %>
+      <!-- User is not logged in, or is not a member -->
+      <% if (!currentUser || !currentUser.member) { %>
         <li class="message-card-limited">
           <span><%= message.title %></span>
           <span><%= message.content %></span>
+        </li>
+      <% } else { %> <!-- User is a Member -->
+        <li class="message-card">
+          <div class="message-head">
+            <!-- If User is Admin, enable delete button -->
+            <% if (currentUser.admin) {  %>
+              <form method="POST" action="/message/<%= message._id %>/delete" class="message-delete-form">
+                <input 
+                  id=""
+                  type="hidden"
+                  value="<%= message._id %>"
+                  required="true"
+                >
+                <button class="message-delete-btn">X</button>
+              </form>
+            <% } %>
+          </div>
+          <!-- Main Card Content // User and Content // -->
+          <div class="message-main">
+            <div class="message-user">
+              <img src="/<%= message.user.icon %>" alt="User Icon" class="message-user-icon">
+              <span><%= message.user.username%></span>
+            </div>
+            <div class="message-text">
+              <p><%= message.title %></p>
+              <p><%= message.content %></p>
+            </div>
+          </div>
+          <div class="message-date">
+            <span><%= message.date_ISO %></span>
+          </div>
         </li>
       <% } %>
     <% }) %>
