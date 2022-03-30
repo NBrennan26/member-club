@@ -31,8 +31,8 @@
               <span><%= message.user.username%></span>
             </div>
             <div class="message-text">
-              <p><%= message.title %></p>
-              <p><%= message.content %></p>
+              <p class="message-title"><%= message.title %></p>
+              <p class="message-content"><%= message.content %></p>
             </div>
           </div>
           <div class="message-date">
@@ -42,7 +42,8 @@
       <% } %>
     <% }) %>
   <% } else { %>
-    <span>There are none</span>
+    <span>There are no messages yet.</span>    
+    <span><a href="/message/create">Add your own Message now</a></span>
   <% } %>
 </ul>
 <br>

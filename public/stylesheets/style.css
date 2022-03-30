@@ -108,6 +108,12 @@ footer a {
 .message-text {
 
 }
+.message-title {
+  margin: 0 .5em 1em .5em;
+}
+.message-content {
+
+}
 .message-date {
   position: absolute;
   bottom: .5em;
