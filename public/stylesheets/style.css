@@ -41,6 +41,9 @@ footer a {
   margin: 0 1em;
   text-decoration: none;
 }
+/****************/
+/* Sign Up Form */
+/****************/
 .signup-form-cont {
   width: 100%;
   display: flex;
@@ -55,27 +58,19 @@ footer a {
   align-items: center;
 }
 .signup-field {
-
-}
-.signup-username {
-
-}
-.signup-password {
-
-}
-.signup-confrim-password {
-
+  margin-bottom: .6em;
 }
 .icon-radio-cont {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin: .5em 0;
 }
 .icon-radio-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2em;
+  margin: .5em;
 }
 .icon-radio-img {
   height: 50px;
@@ -85,15 +80,42 @@ footer a {
 }
 .radio-button:checked + label {
   border-radius: 50px;
-  box-shadow: 0px 0px 10px 2px rgb(212, 21, 21);
+  box-shadow: 0px 0px 10px 2px rgb(0, 0, 0);
 }
 .signup-btn-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+/***************/
+/* Log In Form */
+/***************/
+.login-form-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.log-in-form {
+  max-width: 75%;
+}
+.login-fields-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-field {
+  margin-bottom: .6em;
+}
+.login-btn-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+
+/****************/
 /* Message List */
+/****************/
 .message-board-cont {
   width: 100%;
   display: flex;
