@@ -4,9 +4,17 @@
       <!-- Check if User is logged in -->
       <!-- User is not logged in, or is not a member -->
       <% if (!currentUser || !currentUser.member) { %>
-        <li class="message-card-limited">
-          <span><%= message.title %></span>
-          <span><%= message.content %></span>
+        <li class="message-card">
+          <!-- Main Card Content // User and Content // -->
+          <div class="message-main">
+            <div class="message-user">
+              <img src="/no-user.png" alt="User Icon" class="message-user-icon">
+            </div>
+            <div class="message-text">
+              <p class="message-title"><%= message.title %></p>
+              <p class="message-content"><%= message.content %></p>
+            </div>
+          </div>
         </li>
       <% } else { %> <!-- User is a Member -->
         <li class="message-card">
