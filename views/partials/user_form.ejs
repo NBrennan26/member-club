@@ -1,191 +1,201 @@
-<form action="" method="POST" class="sign-up-form">
-  <div class="signup-fields-cont">
-    <label for="username">Username</label>
-    <input
-      type="text"
-      name="username"
-      id="username"
-      class="signup-username signup-field"
-      value="<%= user.username %>"
-      placeholder="Username"
-      minlength="1"
-      maxlength="30"
-      required
-    />
-    <label for="password">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      class="signup-password signup-field"
-      value="<%= user.password %>"
-      minlength="5"
-      maxlength="40"
-      required
-    />
-    <label for="confirm_password">Confirm Password</label>
-    <input
-      type="password"
-      name="confirm_password"
-      id="confirm_password"
-      class="signup-confrim-password signup-field"
-      value="<%= user.confirm_password %>"
-      minlength="5"
-      maxlength="40"
-      required
-    />
-  </div>
-  <div class="hidden-elem">
-    <input 
-      type="text"
-      name="member"
-      id="member"
-      <% if (user.member !== true) { %>
-        value=false
-      <% } else { %>
-        value=true
-      <% } %>
-    />
-  </div>
-  <div class="hidden-elem">
-    <input 
-      type="text"
-      name="admin"
-      id="admin"
-      <% if (user.admin !== true) { %>
-        value=false
-      <% } else { %>
-        value=true
-      <% } %>   
-    />
-  </div>
-  <div class="icon-radio-cont">
+<div class="signup-form-cont">
+  <form action="" method="POST" class="sign-up-form">
+    <div class="signup-fields-cont">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        class="signup-username signup-field"
+        value="<%= user.username %>"
+        placeholder="Username"
+        minlength="1"
+        maxlength="30"
+        required
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="signup-password signup-field"
+        value="<%= user.password %>"
+        minlength="5"
+        maxlength="40"
+        required
+      />
+      <label for="confirm_password">Confirm Password</label>
+      <input
+        type="password"
+        name="confirm_password"
+        id="confirm_password"
+        class="signup-confrim-password signup-field"
+        value="<%= user.confirm_password %>"
+        minlength="5"
+        maxlength="40"
+        required
+      />
+    </div>
+    <div class="hidden-elem">
+      <input 
+        type="text"
+        name="member"
+        id="member"
+        <% if (user.member !== true) { %>
+          value=false
+        <% } else { %>
+          value=true
+        <% } %>
+      />
+    </div>
+    <div class="hidden-elem">
+      <input 
+        type="text"
+        name="admin"
+        id="admin"
+        <% if (user.admin !== true) { %>
+          value=false
+        <% } else { %>
+          value=true
+        <% } %>   
+      />
+    </div>
+    <div class="icon-radio-cont">
 
-    <div class="icon-radio-item">
-      <label for="chameleon">
-        <img 
-          src="/chameleon.png" 
-          alt="Chameleon"
-          class="icon-radio-img"
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="chameleon"
+          class="radio-button"
+          value="chameleon.png"
+          name="icon"
+          checked
         >
-      </label>
-      <input 
-        type="radio"
-        id="chameleon"
-        value="chameleon.png"
-        name="icon"
-        checked
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="dog">
-        <img 
-          src="/dog.png" 
-          alt="Dog"
-          class="icon-radio-img"
+        <label for="chameleon">
+          <img 
+            src="/chameleon.png" 
+            alt="Chameleon"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="dog"
+          class="radio-button"
+          value="dog.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="dog"
-        value="dog.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="elephant">
-        <img 
-          src="/elephant.png" 
-          alt="Elephant"
-          class="icon-radio-img"
+        <label for="dog">
+          <img 
+            src="/dog.png" 
+            alt="Dog"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="elephant"
+          class="radio-button"
+          value="elephant.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="elephant"
-        value="elephant.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="goat">
-        <img 
-          src="/goat.png" 
-          alt="Goat"
-          class="icon-radio-img"
+        <label for="elephant">
+          <img 
+            src="/elephant.png" 
+            alt="Elephant"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="goat"
+          class="radio-button"
+          value="goat.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="goat"
-        value="goat.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="kangaroo">
-        <img 
-          src="/kangaroo.png" 
-          alt="Kangaroo"
-          class="icon-radio-img"
+        <label for="goat">
+          <img 
+            src="/goat.png" 
+            alt="Goat"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="kangaroo"
+          class="radio-button"
+          value="kangaroo.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="kangaroo"
-        value="kangaroo.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="monkey">
-        <img 
-          src="/monkey.png" 
-          alt="Monkey"
-          class="icon-radio-img"
+        <label for="kangaroo">
+          <img 
+            src="/kangaroo.png" 
+            alt="Kangaroo"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="monkey"
+          class="radio-button"
+          value="monkey.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="monkey"
-        value="monkey.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="penguin">
-        <img 
-          src="/penguin.png" 
-          alt="Penguin"
-          class="icon-radio-img"
+        <label for="monkey">
+          <img 
+            src="/monkey.png" 
+            alt="Monkey"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="penguin"
+          class="radio-button"
+          value="penguin.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="penguin"
-        value="penguin.png"
-        name="icon"
-      >
-    </div>
-    <div class="icon-radio-item">
-      <label for="tiger">
-        <img 
-          src="/tiger.png" 
-          alt="Tiger"
-          class="icon-radio-img"
+        <label for="penguin">
+          <img 
+            src="/penguin.png" 
+            alt="Penguin"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
+      <div class="icon-radio-item">
+        <input 
+          type="radio"
+          id="tiger"
+          class="radio-button"
+          value="tiger.png"
+          name="icon"
         >
-      </label>
-      <input 
-        type="radio"
-        id="tiger"
-        value="tiger.png"
-        name="icon"
-      >
-    </div>
+        <label for="tiger">
+          <img 
+            src="/tiger.png" 
+            alt="Tiger"
+            class="icon-radio-img"
+          >
+        </label>
+      </div>
 
-  </div>
-  <button type="submit">Register</button>
-</form>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+</div>
 
 <% if (errors) { %>
   <ul>
