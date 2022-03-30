@@ -31,14 +31,6 @@ exports.sign_up_get = function (req, res) {
 // Handle User sign-up on POST
 exports.sign_up_post = [
   // Validate and Sanitize fields
-  body("first_name", "First Name is required and can be 30 characters max.")
-    .trim()
-    .isLength({ min: 1, max: 30 })
-    .escape(),
-  body("last_name", "Last Name is required and can be 30 characters max.")
-    .trim()
-    .isLength({ min: 1, max: 30 })
-    .escape(),
   body("username", "Username is required and can be 30 characters max.")
     .trim()
     .isLength({ min: 1, max: 30 })
@@ -87,8 +79,6 @@ exports.sign_up_post = [
           return next(err);
         }
         let user = new User({
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
           username: req.body.username,
           password: hashedPassword,
           icon: req.body.icon,

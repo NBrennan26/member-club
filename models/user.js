@@ -4,16 +4,6 @@ const uniqueValidator = require("mongoose-unique-validator");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  first_name: {
-    type: String,
-    required: true,
-    maxlength: 50,
-  },
-  last_name: {
-    type: String,
-    required: true,
-    maxlength: 50,
-  },
   username: {
     type: String,
     required: true,
@@ -36,12 +26,6 @@ const UserSchema = new Schema({
   admin: {
     type: Boolean,
   },
-});
-
-// Virtual for User's Full Name
-UserSchema.virtual("fullname").get(function () {
-  let fullname = this.first_name + " " + this.last_name;
-  return fullname;
 });
 
 // Virtual for User's URL

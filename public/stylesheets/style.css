@@ -41,6 +41,24 @@ footer a {
   margin: 0 1em;
   text-decoration: none;
 }
+.sign-up-form {
+
+}
+.signup-fields-cont {
+
+}
+.signup-field {
+
+}
+.signup-username {
+
+}
+.signup-password {
+
+}
+.signup-confrim-password {
+
+}
 .icon-radio-cont {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

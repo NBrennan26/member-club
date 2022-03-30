@@ -1,59 +1,40 @@
-<h1>User Sign-Up/Update Form</h1>
-
-<form action="" method="POST">
-  <label for="first_name">First Name</label>
-  <input
-    type="text"
-    name="first_name"
-    id="first_name"
-    value="<%= user.first_name %>"
-    placeholder="First Name"
-    minlength="1"
-    maxlength="30"
-    required
-  />
-  <label for="last_name">Last Name</label>
-  <input
-    type="text"
-    name="last_name"
-    id="last_name"
-    value="<%= user.last_name %>"
-    placeholder="Last Name"
-    minlength="1"
-    maxlength="30"
-    required
-  />
-  <label for="username">Username</label>
-  <input
-    type="text"
-    name="username"
-    id="username"
-    value="<%= user.username %>"
-    placeholder="Username"
-    minlength="1"
-    maxlength="30"
-    required
-  />
-  <label for="password">Password</label>
-  <input
-    type="password"
-    name="password"
-    id="password"
-    value="<%= user.password %>"
-    minlength="5"
-    maxlength="40"
-    required
-  />
-  <label for="confirm_password">Confirm Password</label>
-  <input
-  type="password"
-  name="confirm_password"
-  id="confirm_password"
-  value="<%= user.confirm_password %>"
-  minlength="5"
-  maxlength="40"
-  required
-  />
+<form action="" method="POST" class="sign-up-form">
+  <div class="signup-fields-cont">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      class="signup-username signup-field"
+      value="<%= user.username %>"
+      placeholder="Username"
+      minlength="1"
+      maxlength="30"
+      required
+    />
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      class="signup-password signup-field"
+      value="<%= user.password %>"
+      minlength="5"
+      maxlength="40"
+      required
+    />
+    <label for="confirm_password">Confirm Password</label>
+    <input
+      type="password"
+      name="confirm_password"
+      id="confirm_password"
+      class="signup-confrim-password signup-field"
+      value="<%= user.confirm_password %>"
+      minlength="5"
+      maxlength="40"
+      required
+    />
+  </div>
   <div class="hidden-elem">
     <input 
       type="text"
@@ -205,7 +186,6 @@
   </div>
   <button type="submit">Register</button>
 </form>
-
 
 <% if (errors) { %>
   <ul>
