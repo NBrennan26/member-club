@@ -167,7 +167,6 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 /****************/
 /* Message List */
 /****************/
@@ -343,4 +342,21 @@ footer a {
   height: 3vh;
   width: 3vh;
   vertical-align: middle;
+}
+/**********/
+/* Errors */
+/**********/
+.error-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.error-list {
+  max-width: 75%;
+  padding: .5em;
+  background-color: rgba(255, 0, 0, 0.616);
+  border-radius: 10px;
+}
+.error-list-item {
+  color: black;
 }

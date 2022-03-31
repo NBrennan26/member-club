@@ -18,8 +18,7 @@
         class="message-field message-content-field"
         placeholder="Your Content Here"
         required
-      ><% if (message) { %><%= message.content %><% } %>
-      </textarea>
+      ><% if (message) { %><%= message.content %><% }%></textarea>
     </div>
     <div class="hidden-elem">
       <input 
@@ -34,10 +33,13 @@
     </div>
   </form>
 </div>
+
 <% if (errors) { %>
-  <ul>
-    <% errors.forEach(error => { %>
-      <li><%= error.msg %></li>
-    <% }) %>
-  </ul>
+  <div class="error-cont">
+    <ul class="error-list">
+      <% errors.forEach(error => { %>
+        <li class="error-list-item"><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
 <% } %>
