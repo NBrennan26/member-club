@@ -1,32 +1,37 @@
-<h1>Join the Club</h1>
-
-<!-- Check if Logged In-->
-<% if (currentUser) { %> 
-  <!-- Check if already a member-->
-  <% if (currentUser.member) { %>
-    <h2>You are already a member</h2>
-    <h3>Visit the <a href="/messages">Message Board</a></h3>
-  <!-- If not a member, prompt to fill form-->
-  <% } else { %>
-    <h2>Please enter the secret code to join the Club</h2>
-    <form action="" method="POST">
-      <label for="member_code">Membership Code</label>
-      <input
-        type="password"
-        name="member_code"
-        id="member_code"
-        placeholder="Membership Code"
-        minlength="1"
-        maxlength="100"
-        required
-      />
-      <button type="submit">Join!</button>
-    </form>
+<div class="join-club-cont">
+  <!-- Check if Logged In-->
+  <% if (currentUser) { %> 
+    <!-- Check if already a member-->
+    <% if (currentUser.member) { %>
+      <h2>You are already a member</h2>
+      <h3>Visit the <a href="/messages">Message Board</a></h3>
+    <!-- If not a member, prompt to fill form-->
+    <% } else { %>
+      <form action="" method="POST" class="join-club-form">
+        <div class="join-fields-cont">
+          <label for="member_code">Membership Code</label>
+            <input
+              type="password"
+              name="member_code"
+              id="member_code"
+              class="join-field"
+              placeholder="Membership Code"
+              minlength="1"
+              maxlength="100"
+              required
+            />
+        </div>
+        <div class="join-btn-cont">
+          <button type="submit">Join!</button>
+        </div>
+      </form>
+    <% } %>
+  <!-- If not Logged In, prompt to sign-up/log-in-->
+  <% } else { %>  
+    <h2>Please Sign Up and Log In to join the Club</h2>
   <% } %>
-<!-- If not Logged In, prompt to sign-up/log-in-->
-<% } else { %>  
-  <h2>Please Sign Up and Log In to join the Club</h2>
-<% } %>
+</div>
+
 
 <% if (errors) { %>
   <ul>

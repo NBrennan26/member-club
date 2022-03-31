@@ -138,6 +138,36 @@ body {
   flex-direction: column;
   align-items: center;
 }
+/*************/
+/* Join Club */
+/*************/
+.join-club-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.join-club-form {
+  max-width: 75%;
+  padding: 2em;
+  border-radius: 10px;
+  background-color: rgb(4, 196, 217);
+  box-shadow: 0 0 5px 2px rgb(24, 68, 93);
+}
+.join-fields-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.join-field {
+  margin-top: .2em;
+  margin-bottom: 0.6em;
+}
+.join-btn-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /****************/
 /* Message List */
 /****************/
