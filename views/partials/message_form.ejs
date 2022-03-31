@@ -13,14 +13,13 @@
       />
       <label for="content">Message Body</label>
       <textarea
-        type="text"
         name="content"
         id="content"
         class="message-field message-content-field"
-        value="<%= message.content %>"
         placeholder="Your Content Here"
         required
-      ></textarea>
+      ><% if (message) { %><%= message.content %><% } %>
+      </textarea>
     </div>
     <div class="hidden-elem">
       <input 
