@@ -3,8 +3,7 @@
   <% if (currentUser) { %> 
     <!-- Check if already an admin-->
     <% if (currentUser.admin) { %>
-      <h2>You are already an admin</h2>
-      <h3>Visit the <a href="/messages">Message Board</a></h3>
+      <p>Admin Permissions Added. Visit the <a href="/messages">Message Board</a></p>
     <!-- If not an admin, prompt to fill form-->
     <% } else { %>
       <form action="" method="POST" class="join-club-form">

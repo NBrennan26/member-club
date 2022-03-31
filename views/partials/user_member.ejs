@@ -3,8 +3,7 @@
   <% if (currentUser) { %> 
     <!-- Check if already a member-->
     <% if (currentUser.member) { %>
-      <h2>You are already a member</h2>
-      <h3>Visit the <a href="/messages">Message Board</a></h3>
+      <p>Welcome to the Club. Visit the <a href="/messages">Message Board</a></p>
     <!-- If not a member, prompt to fill form-->
     <% } else { %>
       <form action="" method="POST" class="join-club-form">
