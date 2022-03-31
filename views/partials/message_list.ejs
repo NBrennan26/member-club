@@ -1,4 +1,11 @@
 <ul class="message-board-cont">
+  <% if (currentUser) { %>
+    <% if (currentUser.member) { %>
+      <div class="mess-board-add">
+        <a href="/message/create">Add Message</a>
+      </div>
+    <% } %>
+  <% } %>
   <% if (message_list.length > 0) { %>
     <% message_list.forEach(message => { %>
       <!-- Check if User is logged in -->

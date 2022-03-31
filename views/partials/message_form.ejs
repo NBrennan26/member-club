@@ -1,25 +1,27 @@
-<h1>New/Update Message Form</h1>
-
-<div>
-  <form action="" method="POST">
-    <label for="title">Message Title</label>
-    <input
-      type="text"
-      name="title"
-      id="title"
-      value="<%= message.title %>"
-      placeholder="Title"
-      required
-    />
-    <label for="content">Content</label>
-    <input
-      type="text"
-      name="content"
-      id="content"
-      value="<%= message.content %>"
-      placeholder="Your Content Here"
-      required
-    />
+<div class="message-form-cont">
+  <form action="" method="POST" class="message-form">
+    <div class="message-fields-cont">
+      <label for="title">Message Title</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        class="message-field message-title-field"
+        value="<%= message.title %>"
+        placeholder="Title"
+        required
+      />
+      <label for="content">Message Body</label>
+      <textarea
+        type="text"
+        name="content"
+        id="content"
+        class="message-field message-content-field"
+        value="<%= message.content %>"
+        placeholder="Your Content Here"
+        required
+      ></textarea>
+    </div>
     <div class="hidden-elem">
       <input 
         type="text"
@@ -28,7 +30,9 @@
         value="<%= user._id %>"
       />
     </div>
-    <button type="submit">Submit</button>
+    <div class="message-btn-cont">
+      <button type="submit">Submit</button>
+    </div>
   </form>
 </div>
 <% if (errors) { %>

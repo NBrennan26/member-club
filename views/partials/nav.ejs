@@ -1,25 +1,30 @@
 <div class="nav-bar">
-  <a href="/">Home</a>
-  <% if (currentUser) { %>
-    <a href="/log-out">Log Out</a>
-  <% } else { %>
-    <a href="/log-in">Log In</a>
-  <% } %>
-  <% if (!currentUser) { %>
-    <a href="/sign-up">Sign Up</a> 
-  <% } %>
-  <% if(currentUser) { %>
-    <% if (!currentUser.member) { %>
-      <a href="/join-club">Join Club</a>
+  <div class="nav-home-cont">
+    <a href="/">Home</a>
+  </div>
+  <div class="nav-login-cont">
+    <div class="login-cont">
+      <% if (currentUser) { %>
+        <a href="/log-out">Log Out</a>
+      <% } else { %>
+        <a href="/log-in">Log In</a>
+      <% } %>
+    </div>
+    <% if (!currentUser) { %>
+      <div class="signup-cont">
+        <a href="/sign-up">Sign Up</a> 
+      </div>
     <% } %>
-  <% } %> 
-  <% if(currentUser) { %>
-    <% if (!currentUser.admin) { %>
-      <a href="/become-admin">Become Admin</a>
+    <% if (currentUser && !currentUser.member) { %>
+      <div class="join-cont">
+        <a href="/join-club">Join Club</a>
+      </div>
     <% } %>
-  <% } %> 
-  <a href="/contact">Contact</a>
-  <% if (currentUser) { %>
-    <a href="/message/create">Add Message</a>
-  <% } %>
+    <% if (currentUser && !currentUser.admin) { %>
+      <div class="admin-cont">
+        <a href="/become-admin">Become Admin</a>
+      </div>
+    <% } %>
+  </div>
+
 </div>

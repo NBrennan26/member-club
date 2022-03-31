@@ -136,6 +136,25 @@ footer a {
   flex-direction: column;
   align-items: center;
 }
+.mess-board-add {
+  background-color: rgb(24, 68, 93);
+  padding: .2em;
+  border-radius: 4px;
+}
+.mess-board-add a {
+  text-decoration: none;
+  color: rgb(4, 196, 217);
+}
+.mess-board-add:hover {
+  padding: .2em .4em;
+  border-right: 2px solid rgb(11, 38, 49);
+  border-left: 2px solid rgb(11, 38, 49);
+  background-color: rgb(31, 119,153);
+  cursor: pointer;
+}
+.mess-board-add:hover a {
+  color: rgb(121, 230, 242);
+}
 .message-card {
   width: 70%;
   max-width: 900px;
@@ -162,6 +181,7 @@ footer a {
   align-items: center;
   background: red;
   border: none;
+  border-radius: 5px;
   width: 20px;
   height: 20px;
 }
@@ -205,6 +225,44 @@ footer a {
   display: flex;
   cursor: pointer;
 }
+/******************/
+/* Create Message */
+/******************/
+.message-form-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.message-form {
+  width: 75%;
+  padding: 2em;
+  border-radius: 10px;
+  background-color: rgb(4, 196, 217);
+  box-shadow: 0 0 5px 2px rgb(24, 68, 93);
+}
+.message-fields-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.message-field {
+  margin-bottom: .6em;
+}
+.message-title-field {
+  width: 75%;
+  max-width: 800px;
+}
+.message-content-field {
+  min-width: 80%;
+  max-width: 90%;
+  min-height: 5em;
+  max-height: 300px;
+}
+.message-btn-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
 /****************/
 /* Contact Info */
 /****************/
