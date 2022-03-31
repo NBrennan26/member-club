@@ -1,30 +1,36 @@
-<!-- Check if Logged In-->
-<% if (currentUser) { %> 
-  <!-- Check if already an admin-->
-  <% if (currentUser.admin) { %>
-    <h2>You are already an admin</h2>
-    <h3>Visit the <a href="/messages">Message Board</a></h3>
-  <!-- If not an admin, prompt to fill form-->
-  <% } else { %>
-    <h2>Please enter the secret code to become an Admin</h2>
-    <form action="" method="POST">
-      <label for="admin_code">Admin Code</label>
-      <input
-        type="password"
-        name="admin_code"
-        id="admin_code"
-        placeholder="Admin Code"
-        minlength="1"
-        maxlength="100"
-        required
-      />
-      <button type="submit">Become Admin</button>
-    </form>
+<div class="join-club-cont">
+  <!-- Check if Logged In-->
+  <% if (currentUser) { %> 
+    <!-- Check if already an admin-->
+    <% if (currentUser.admin) { %>
+      <h2>You are already an admin</h2>
+      <h3>Visit the <a href="/messages">Message Board</a></h3>
+    <!-- If not an admin, prompt to fill form-->
+    <% } else { %>
+      <form action="" method="POST" class="join-club-form">
+        <div class="join-fields-cont">
+          <label for="admin_code">Admin Code</label>
+          <input
+            type="password"
+            name="admin_code"
+            id="admin_code"
+            class="join-field"
+            placeholder="Admin Code"
+            minlength="1"
+            maxlength="100"
+            required
+          />
+        </div>
+        <div class="join-btn-cont">
+          <button type="submit">Become Admin</button>
+        </div>
+      </form>
+    <% } %>
+  <!-- If not Logged In, prompt to sign-up/log-in-->
+  <% } else { %>  
+    <h2>Please Sign Up and Log In in order to become an Admin</h2>
   <% } %>
-<!-- If not Logged In, prompt to sign-up/log-in-->
-<% } else { %>  
-  <h2>Please Sign Up and Log In in order to become an Admin</h2>
-<% } %>
+</div>
 
 <% if (errors) { %>
   <ul>
