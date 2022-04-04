@@ -84,7 +84,6 @@ exports.message_update_get = function (req, res, next) {
       return next(err);
     }
     // Successful, so Render
-    console.log("Message is there.")
     res.render("index", {
       title: "Members Only | Edit Message",
       user: req.user,
@@ -96,12 +95,60 @@ exports.message_update_get = function (req, res, next) {
 };
 
 // Handle update Message on POST
-exports.message_update_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Update Message",
-    view: "message_form",
-  });
-};
+exports.message_update_post = [
+  // Validate and Sanitize Fields
+  body("title")
+    .trim()
+    .isLength({ max: 140 })
+    .escape()
+    .withMessage("Title is required and must be less than 140 characters"),
+  body("content")
+    .trim()
+    .isLength({ max: 280 })
+    .escape()
+    .withMessage("Content is required and must be less than 280 characters"),
+  body("user").trim().escape(),
+
+  // Process request after Validation and Sanitization
+  (req, res, next) => {
+    // Extract Validation Errors from the Request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are Errors. Render Again
+      res.render("index", {
+        title: "Members Only | New Message",
+        user: req.user,
+        message: req.body,
+        errors: errors.array(),
+        view: "message_form",
+      });
+      return;
+    } else {
+      // Data is Valid, no Errors
+      // Create new Message object
+      let message = new Message({
+        title: req.body.title,
+        content: req.body.content,
+        timestamp: Date.now(),
+        user: req.body.user,
+        _id: req.params.id,
+      });
+      Message.findByIdAndUpdate(
+        req.params.id,
+        message,
+        {},
+        function (err, themessage) {
+          if (err) {
+            return next(err);
+          }
+          // Successful - redirect to message list
+          res.redirect("/");
+        }
+      );
+    }
+  },
+];
 
 // Display form to delete a specific Message
 exports.message_delete_get = function (req, res) {
