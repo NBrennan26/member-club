@@ -159,7 +159,7 @@ body {
   align-items: center;
 }
 .join-field {
-  margin-top: .2em;
+  margin-top: 0.2em;
   margin-bottom: 0.6em;
 }
 .join-btn-cont {
@@ -225,7 +225,7 @@ body {
   height: 20px;
 }
 .update-btn {
-  margin-right: .2em;
+  margin-right: 0.2em;
 }
 .delete-btn {
   background: red;
@@ -342,14 +342,26 @@ footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(31, 119, 153);
 }
 footer a {
   text-decoration: none;
   color: black;
+}
+.footer-link-cont {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.footer-contact-cont,
+.footer-github-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+}
+.footer-github-cont {
+  margin-right: 1em;
 }
 #github-icon {
   height: 3vh;
@@ -366,7 +378,7 @@ footer a {
 }
 .error-list {
   max-width: 75%;
-  padding: .5em;
+  padding: 0.5em;
   background-color: rgba(255, 0, 0, 0.616);
   border-radius: 10px;
 }

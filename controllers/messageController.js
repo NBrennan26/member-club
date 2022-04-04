@@ -63,14 +63,6 @@ exports.message_create_post = [
   },
 ];
 
-// Display details of a specific Message
-exports.message_details = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Message Details",
-    view: "message_detail",
-  });
-};
-
 // Display form to update a specific Message
 exports.message_update_get = function (req, res, next) {
   Message.findById(req.params.id).exec(function (err, message) {
@@ -149,14 +141,6 @@ exports.message_update_post = [
     }
   },
 ];
-
-// Display form to delete a specific Message
-exports.message_delete_get = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Delete Message",
-    view: "message_delete",
-  });
-};
 
 // Handle delete Message on POST
 exports.message_delete_post = function (req, res) {

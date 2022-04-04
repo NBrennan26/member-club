@@ -155,38 +155,6 @@ exports.log_out = function (req, res) {
   res.redirect("/");
 };
 
-// Display details of a specific User
-exports.user_details = function (req, res) {
-  res.render("index", {
-    title: "Members Only | User Details",
-    view: "user_detail",
-  });
-};
-
-// Display form to update User details
-exports.user_update_get = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Update User",
-    view: "user_form",
-  });
-};
-
-// Handle update User details
-exports.user_update_post = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Update User",
-    view: "user_form",
-  });
-};
-
-// Display list of all Users
-exports.user_list = function (req, res) {
-  res.render("index", {
-    title: "Members Only | All Users",
-    view: "user_list",
-  });
-};
-
 // Display form to become member
 exports.join_club_get = function (req, res) {
   res.render("index", {
