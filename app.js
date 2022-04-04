@@ -19,7 +19,9 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 
 // mongoDB & mongoose setup
-const mongoDB = process.env.MONGO_DB;
+const mongoDB = process.env.MONGO_URI || process.env.MONGO_DB;
+console.log("MONGOOSE CONNECTION HERE")
+console.log(mongoDB)
 mongoose.connect(mongoDB, {
   useNewURLParser: true,
   useUnifiedTopology: true,
@@ -70,7 +72,6 @@ passport.deserializeUser(function (id, done) {
 
 app.use(
   session({
-    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
   })
