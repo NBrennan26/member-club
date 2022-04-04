@@ -72,10 +72,26 @@ exports.message_details = function (req, res) {
 };
 
 // Display form to update a specific Message
-exports.message_update_get = function (req, res) {
-  res.render("index", {
-    title: "Members Only | Update Message",
-    view: "message_form",
+exports.message_update_get = function (req, res, next) {
+  Message.findById(req.params.id).exec(function (err, message) {
+    if (err) {
+      return next(err);
+    }
+    if (message == null) {
+      // No Message Found
+      let err = new Error("Message Not Found");
+      err.status = 404;
+      return next(err);
+    }
+    // Successful, so Render
+    console.log("Message is there.")
+    res.render("index", {
+      title: "Members Only | Edit Message",
+      user: req.user,
+      message,
+      errors: "",
+      view: "message_form",
+    });
   });
 };
 

@@ -28,7 +28,7 @@
           <div class="message-head">
             <!-- If User posted the message, enable edit button -->
             <% if (message.user.username === currentUser.username) {  %>
-              <form method="POST" action="/message/<%= message._id %>/update" class="message-update-form">
+              <form method="GET" action="/message/<%= message._id %>/update" class="message-update-form">
                 <input 
                   id=""
                   type="hidden"
