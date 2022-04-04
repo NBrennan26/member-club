@@ -26,6 +26,18 @@
       <% } else { %> <!-- User is a Member -->
         <li class="message-card">
           <div class="message-head">
+            <!-- If User posted the message, enable edit button -->
+            <% if (message.user.username === currentUser.username) {  %>
+              <form method="POST" action="/message/<%= message._id %>/update" class="message-update-form">
+                <input 
+                  id=""
+                  type="hidden"
+                  value="<%= message._id %>"
+                  required="true"
+                >
+                <button class="message-btn update-btn">Edit</button>
+              </form>
+            <% } %>
             <!-- If User is Admin, enable delete button -->
             <% if (currentUser.admin) {  %>
               <form method="POST" action="/message/<%= message._id %>/delete" class="message-delete-form">
@@ -35,7 +47,7 @@
                   value="<%= message._id %>"
                   required="true"
                 >
-                <button class="message-delete-btn">X</button>
+                <button class="message-btn delete-btn">X</button>
               </form>
             <% } %>
           </div>

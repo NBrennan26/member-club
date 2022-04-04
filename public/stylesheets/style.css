@@ -214,16 +214,25 @@ body {
   position: absolute;
   top: 0.2em;
   right: 0.2em;
+  display: flex;
 }
-.message-delete-btn {
+.message-btn {
   display: none;
   justify-content: center;
   align-items: center;
-  background: red;
   border: none;
   border-radius: 5px;
-  width: 20px;
   height: 20px;
+}
+.update-btn {
+  margin-right: .2em;
+}
+.delete-btn {
+  background: red;
+  width: 20px;
+}
+.delete-btn:hover {
+  background: rgba(255, 0, 0, 0.808);
 }
 .message-main {
   width: 100%;
@@ -261,7 +270,11 @@ body {
   right: 0.5em;
   font-style: italic;
 }
-.message-card:hover .message-head .message-delete-form .message-delete-btn {
+.message-card:hover .message-head .message-delete-form .message-btn {
+  display: flex;
+  cursor: pointer;
+}
+.message-card:hover .message-head .message-update-form .message-btn {
   display: flex;
   cursor: pointer;
 }
