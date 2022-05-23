@@ -1,7 +1,5 @@
 # Members Only Club
 
-[Visit the Site](https://games-nb.web.app/)
-
 The purpose of this project is to practice User Authentication and increase familiarity with Express
 
 ## Built With
